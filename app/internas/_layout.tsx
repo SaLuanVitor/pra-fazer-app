@@ -21,6 +21,8 @@ export default function RootLayout() {
         <Tabs.Screen name="about" options={{
       
     }}/>
+    
     </Tabs>
+    
   );
 }

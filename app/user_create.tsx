@@ -7,10 +7,10 @@ import {ref, set} from "firebase/database"
 
 export default function CreateUser() {
     const router = useRouter();
-    const [nome,setNome] = useState(null);
-    const [email,setEmail] = useState(null);
-    const [senha,setSenha] = useState(null);
-    const [errorCreateUser,setErrorCreateUser] = useState(null);
+    const [nome,setNome] = useState("");
+    const [email,setEmail] = useState("");
+    const [senha,setSenha] = useState("");
+    const [errorCreateUser,setErrorCreateUser] = useState("");
 
     const validarCampos = () =>{
         if(nome ==""){
@@ -22,7 +22,7 @@ export default function CreateUser() {
             setErrorCreateUser("Informe uma senha");
 
         }
-        createUser();
+        setErrorCreateUser("");
     };
 
 

@@ -1,30 +1,36 @@
 import { useRouter } from 'expo-router';
 import React, { useEffect, useState } from 'react'
+import { Auth } from '../scripts/firebase-config';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 
 export default function Index() {
   const router = useRouter();
+    const [email,setEmail] = useState("");
+    const [senha,setSenha] = useState("");
+    const [errorLogin,setErrorLogin] = useState("");
+
+
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../assets/images/logo_pra_fazer.png')} />
 
-            {/* {errorLogin != null && (
+            {errorLogin != null && (
                 <Text style={styles.alert}>{errorLogin}</Text>
-            )} */}
+            )}
 
             <TextInput
                 style={styles.input}
                 placeholder='E-mail'
-                // value={email}
-                // onChangeText={setEmail}
+                value={email}
+                onChangeText={setEmail}
             />
 
             <TextInput
                 style={styles.input}
                 placeholder='Senha'
                 secureTextEntry={true}
-                // value={password}
-                // onChangeText={setPassword}
+                value={senha}
+                onChangeText={setSenha}
             />
 
             <TouchableOpacity 
