@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import React, { useState } from 'react'
+import { StyleSheet, View, Text, TextInput, TouchableOpacity } from "react-native";
 import { auth, db } from "../scripts/firebase-config";
 import { useRouter } from 'expo-router';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
@@ -13,12 +13,13 @@ export default function CreateUser() {
     const [errorCreateUser, setErrorCreateUser] = useState("");
 
     const validarCampos = () => {
-        if (nome === "") {
+        if (nome == "") {
             setErrorCreateUser("Informe um Nome.");
-        } else if (email === "") {
+        } else if (email == "") {
             setErrorCreateUser("Informe um E-Mail");
-        } else if (password === "") {
+        } else if (password == "") {
             setErrorCreateUser("Informe uma Senha");
+
         } else {
             setErrorCreateUser("");
         }
@@ -27,11 +28,12 @@ export default function CreateUser() {
     const createUser = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                // Signed up 
                 const user = userCredential.user;
                 set(ref(db, 'user/' + user.uid), {
                     nome: nome,
                     email: email
-                });
+                })
                 router.push('/');
             })
             .catch((error) => {
@@ -41,111 +43,89 @@ export default function CreateUser() {
             });
     }
 
+
     return (
-        <View style={styles.background}>
-            <Image
-                source={require('../assets/images/bgGifRecipeCreate.gif')}
-                style={styles.gifBackground}
-                resizeMode="cover"
+        <View style={styles.container}>
+            {errorCreateUser != null && (
+                <Text style={styles.alert}>{errorCreateUser}</Text>
+            )}
+
+            <Text style={styles.titulo}>Cadastrar Usuário</Text>
+
+            <TextInput
+                style={styles.input}
+                placeholder='Nome'
+                placeholderTextColor={"#7D7D7D"}
+                value={nome}
+                onChangeText={setNome}
             />
-            <View style={styles.container}>
-                {errorCreateUser !== "" && (
-                    <Text style={styles.alert}>{errorCreateUser}</Text>
-                )}
-                <Text style={styles.titulo}>Cadastrar Usuário</Text>
 
-                <TextInput
-                    style={styles.input}
-                    placeholder='Nome'
-                    placeholderTextColor={"#AFAFAF"}
-                    value={nome}
-                    onChangeText={setNome}
-                />
+            <TextInput
+                style={styles.input}
+                placeholder='E-mail'
+                placeholderTextColor={"#7D7D7D"}
+                value={email}
+                onChangeText={setEmail}
+            />
 
-                <TextInput
-                    style={styles.input}
-                    placeholder='E-mail'
-                    placeholderTextColor={"#AFAFAF"}
-                    value={email}
-                    onChangeText={setEmail}
-                />
+            <TextInput
+                style={styles.input}
+                secureTextEntry={true}
+                placeholder='Senha'
+                placeholderTextColor={"#7D7D7D"}
+                value={password}
+                onChangeText={setPassword}
+            />
 
-                <TextInput
-                    style={styles.input}
-                    secureTextEntry={true}
-                    placeholder='Senha'
-                    placeholderTextColor={"#AFAFAF"}
-                    value={password}
-                    onChangeText={setPassword}
-                />
-
-                <TouchableOpacity
-                    style={styles.button}
-                    onPress={validarCampos}
-                    onPressIn={createUser}
-                >
-                    <Text style={styles.textButton}>Criar usuário</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={validarCampos}
+                onPressIn={createUser}
+            >
+                <Text style={styles.textButton}>Criar usuário</Text>
+            </TouchableOpacity>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    background: {
-        flex: 1,
-        justifyContent: 'center'
-    },
-    gifBackground: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        width: '100%',
-        height: '100%',
-    },
     titulo: {
-        color: "#D76B30", // Cor do título
-        fontSize: 36, // Tamanho do título
-        marginBottom: 40, // Espaço abaixo do título
-        textAlign: 'center',
-        fontWeight: 'bold', // Negrito
+        color: "#fff",
+        fontSize: 32,
+        marginBottom: 50
     },
     container: {
-        backgroundColor: "#FFF9C4", // Fundo pastel
+        backgroundColor: "#F60",
         padding: 30,
-        borderRadius: 10, // Bordas arredondadas
-        alignItems: 'center', // Centraliza o conteúdo do container
-        opacity: 0.9, // Opacidade para visualizar o fundo
+        flex: 1,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     alert: {
         fontSize: 18,
         textAlign: 'center',
-        color: '#FF6347', // Cor da mensagem de erro
+        color: '#FFF',
         marginBottom: 20,
     },
     input: {
         fontSize: 18,
         borderRadius: 10,
-        backgroundColor: '#ffffff', // Cor do fundo dos inputs
-        padding: 15,
+        backgroundColor: '#FFF',
+        padding: 20,
         marginBottom: 20,
-        width: '100%',
-        borderWidth: 1,
-        borderColor: '#A8E6CF', // Cor da borda do input
-        color: '#333', // Cor do texto
+        width: '100%'
     },
     button: {
-        backgroundColor: '#FFD700', // Cor do botão
+        backgroundColor: '#070A52',
         padding: 10,
         borderRadius: 10,
         marginBottom: 20,
-        width: '100%',
+        width: '100%'
     },
     textButton: {
         fontSize: 24,
         textAlign: 'center',
-        color: '#4B0082', // Cor do texto do botão
+        color: '#fff'
     }
 });

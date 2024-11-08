@@ -2,20 +2,18 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import {getDatabase} from "firebase/database"
-// TODO: Add SDKs for Firebase products that yo
+// TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDCtnl4fArDgBcn-MQKAip8-gOn0oRcy4s",
-  authDomain: "app-pra-fazer.firebaseapp.com",
-  databaseURL: "https://pra-fazer-app-default-rtdb.firebaseio.com",
-  projectId: "app-pra-fazer",
-  storageBucket: "app-pra-fazer.appspot.com",
-  messagingSenderId: "520581718434",
-  appId: "1:520581718434:web:6e3980851e70821faf12fb",
-  measurementId: "G-ZGG4M6H2NG"
+  apiKey: "AIzaSyBXMiqIFPzfXdm_2iFB2k8xHduwvaDBU0o",
+  authDomain: "pra-fazer-app-add86.firebaseapp.com",
+  databaseURL: "https://pra-fazer-app-add86-default-rtdb.firebaseio.com",
+  projectId: "pra-fazer-app-add86",
+  storageBucket: "pra-fazer-app-add86.appspot.com",
+  messagingSenderId: "420432091823",
+  appId: "1:420432091823:web:8002b84a1ff06c90fbd25a"
 };
 
 // Initialize Firebase
